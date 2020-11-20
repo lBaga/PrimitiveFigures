@@ -15,9 +15,7 @@ namespace primitives
         COLORREF foregroundColor() const;
         COLORREF backgroundColor() const;
         int thickness() const;
-
-    public:
-        //void draw(CDC* pDC, const RECT& rect) const override = 0;
+        void draw(CDC* pDC, const RECT& rect) const override;
 
     private:
         COLORREF m_backgroundColor;

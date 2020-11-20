@@ -184,8 +184,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BaseShape.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MenuForm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PrimitiveFigures.h" />
     <ClInclude Include="PrimitiveFiguresDoc.h" />
@@ -193,10 +195,14 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MenuForm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -208,6 +214,8 @@
     <ClCompile Include="PrimitiveFiguresView.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Square.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PrimitiveFigures.rc" />

@@ -54,6 +54,18 @@
     <ClInclude Include="targetver.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PrimitiveFiguresDoc.cpp">
@@ -76,6 +88,18 @@
     </ClCompile>
     <ClCompile Include="PrimitiveFigures.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuForm.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,10 @@
 
 #include "MainFrm.h"
 
+
+#include "MenuForm.h"
+#include "PrimitiveFiguresView.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -16,24 +20,24 @@
 IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
-	ON_WM_CREATE()
-	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
-	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
+    ON_WM_CREATE()
+    ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
+    ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
 {
-	ID_SEPARATOR,           // status line indicator
-	ID_INDICATOR_CAPS,
-	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
+    ID_SEPARATOR,           // status line indicator
+    ID_INDICATOR_CAPS,
+    ID_INDICATOR_NUM,
+    ID_INDICATOR_SCRL,
 };
 
 // CMainFrame construction/destruction
 
 CMainFrame::CMainFrame() noexcept
 {
-	// TODO: add member initialization code here
+    // TODO: add member initialization code here
 }
 
 CMainFrame::~CMainFrame()
@@ -42,36 +46,28 @@ CMainFrame::~CMainFrame()
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
-		return -1;
+    if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
+        return -1;
 
-	if (!m_wndStatusBar.Create(this))
-	{
-		TRACE0("Failed to create status bar\n");
-		return -1;      // fail to create
-	}
-	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
+    if (!m_wndStatusBar.Create(this))
+    {
+        TRACE0("Failed to create status bar\n");
+        return -1;      // fail to create
+    }
+    m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
 
-	return 0;
+    return 0;
 }
 
-BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
-	CCreateContext* pContext)
-{
-	return m_wndSplitter.Create(this,
-		2, 2,               // TODO: adjust the number of rows, columns
-		CSize(10, 10),      // TODO: adjust the minimum pane size
-		pContext);
-}
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
-	if( !CFrameWnd::PreCreateWindow(cs) )
-		return FALSE;
-	// TODO: Modify the Window class or styles here by modifying
-	//  the CREATESTRUCT cs
+    if( !CFrameWnd::PreCreateWindow(cs) )
+        return FALSE;
+    // TODO: Modify the Window class or styles here by modifying
+    //  the CREATESTRUCT cs
 
-	return TRUE;
+    return TRUE;
 }
 
 // CMainFrame diagnostics
@@ -79,12 +75,12 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
 {
-	CFrameWnd::AssertValid();
+    CFrameWnd::AssertValid();
 }
 
 void CMainFrame::Dump(CDumpContext& dc) const
 {
-	CFrameWnd::Dump(dc);
+    CFrameWnd::Dump(dc);
 }
 #endif //_DEBUG
 
@@ -93,75 +89,92 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 void CMainFrame::OnApplicationLook(UINT id)
 {
-	CWaitCursor wait;
+    CWaitCursor wait;
 
-	theApp.m_nAppLook = id;
+    theApp.m_nAppLook = id;
 
-	switch (theApp.m_nAppLook)
-	{
-	case ID_VIEW_APPLOOK_WIN_2000:
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManager));
-		break;
+    switch (theApp.m_nAppLook)
+    {
+    case ID_VIEW_APPLOOK_WIN_2000:
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManager));
+        break;
 
-	case ID_VIEW_APPLOOK_OFF_XP:
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerOfficeXP));
-		break;
+    case ID_VIEW_APPLOOK_OFF_XP:
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerOfficeXP));
+        break;
 
-	case ID_VIEW_APPLOOK_WIN_XP:
-		CMFCVisualManagerWindows::m_b3DTabsXPTheme = TRUE;
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
-		break;
+    case ID_VIEW_APPLOOK_WIN_XP:
+        CMFCVisualManagerWindows::m_b3DTabsXPTheme = TRUE;
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
+        break;
 
-	case ID_VIEW_APPLOOK_OFF_2003:
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerOffice2003));
-		CDockingManager::SetDockingMode(DT_SMART);
-		break;
+    case ID_VIEW_APPLOOK_OFF_2003:
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerOffice2003));
+        CDockingManager::SetDockingMode(DT_SMART);
+        break;
 
-	case ID_VIEW_APPLOOK_VS_2005:
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerVS2005));
-		CDockingManager::SetDockingMode(DT_SMART);
-		break;
+    case ID_VIEW_APPLOOK_VS_2005:
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerVS2005));
+        CDockingManager::SetDockingMode(DT_SMART);
+        break;
 
-	case ID_VIEW_APPLOOK_VS_2008:
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerVS2008));
-		CDockingManager::SetDockingMode(DT_SMART);
-		break;
+    case ID_VIEW_APPLOOK_VS_2008:
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerVS2008));
+        CDockingManager::SetDockingMode(DT_SMART);
+        break;
 
-	case ID_VIEW_APPLOOK_WINDOWS_7:
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows7));
-		CDockingManager::SetDockingMode(DT_SMART);
-		break;
+    case ID_VIEW_APPLOOK_WINDOWS_7:
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows7));
+        CDockingManager::SetDockingMode(DT_SMART);
+        break;
 
-	default:
-		switch (theApp.m_nAppLook)
-		{
-		case ID_VIEW_APPLOOK_OFF_2007_BLUE:
-			CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_LunaBlue);
-			break;
+    default:
+        switch (theApp.m_nAppLook)
+        {
+        case ID_VIEW_APPLOOK_OFF_2007_BLUE:
+            CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_LunaBlue);
+            break;
 
-		case ID_VIEW_APPLOOK_OFF_2007_BLACK:
-			CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_ObsidianBlack);
-			break;
+        case ID_VIEW_APPLOOK_OFF_2007_BLACK:
+            CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_ObsidianBlack);
+            break;
 
-		case ID_VIEW_APPLOOK_OFF_2007_SILVER:
-			CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_Silver);
-			break;
+        case ID_VIEW_APPLOOK_OFF_2007_SILVER:
+            CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_Silver);
+            break;
 
-		case ID_VIEW_APPLOOK_OFF_2007_AQUA:
-			CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_Aqua);
-			break;
-		}
+        case ID_VIEW_APPLOOK_OFF_2007_AQUA:
+            CMFCVisualManagerOffice2007::SetStyle(CMFCVisualManagerOffice2007::Office2007_Aqua);
+            break;
+        }
 
-		CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerOffice2007));
-		CDockingManager::SetDockingMode(DT_SMART);
-	}
+        CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerOffice2007));
+        CDockingManager::SetDockingMode(DT_SMART);
+    }
 
-	RedrawWindow(nullptr, nullptr, RDW_ALLCHILDREN | RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME | RDW_ERASE);
+    RedrawWindow(nullptr, nullptr, RDW_ALLCHILDREN | RDW_INVALIDATE | RDW_UPDATENOW | RDW_FRAME | RDW_ERASE);
 
 }
 
 void CMainFrame::OnUpdateApplicationLook(CCmdUI* pCmdUI)
 {
-	pCmdUI->SetRadio(theApp.m_nAppLook == pCmdUI->m_nID);
+    pCmdUI->SetRadio(theApp.m_nAppLook == pCmdUI->m_nID);
 }
 
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/,
+    CCreateContext* pContext)
+{
+    CPrimitiveFiguresView* pPrimFigView;
+    MenuForm* pMenuForm;
+
+    m_wndSplitter.CreateStatic(this, 2, 1);
+    m_wndSplitter.CreateView(0, 0, RUNTIME_CLASS(MenuForm), CSize(0, 0), pContext);
+    m_wndSplitter.CreateView(1, 0, RUNTIME_CLASS(CPrimitiveFiguresView), CSize(0, 0), pContext);
+
+    m_wndSplitter.SetRowInfo(0, 200, 10);
+
+    pMenuForm = (MenuForm*)m_wndSplitter.GetPane(0, 0);
+    pPrimFigView = (CPrimitiveFiguresView*)m_wndSplitter.GetPane(1, 0);
+
+    return TRUE;
+}

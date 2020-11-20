@@ -6,6 +6,8 @@ class CDC;
 
 namespace primitives
 {
+    enum class ShapeType { None, Circle, Rectangle, Square, Triangle};
+
     class BaseShape
     {
     public:

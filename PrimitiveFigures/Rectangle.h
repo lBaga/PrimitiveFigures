@@ -7,9 +7,18 @@ namespace primitives
     {
     public:
         Rectangle();
-        Rectangle(int x, int y, int w, int h);
+        Rectangle(LONG x, LONG y, LONG w, LONG h);
         Rectangle(const CRect& rect);
 
+        void setStartPoint(CPoint point);
+        void setEndPoint(CPoint point);
+        void setWidth(LONG w);
+        void setHeight(LONG h);
+
+        CPoint startPoint() const;
+        LONG width() const;
+        LONG height() const;
+        CRect rect() const;
     public:
         void draw(CDC* pDC, const RECT& rect) const override;
 
@@ -17,4 +26,3 @@ namespace primitives
         CRect m_data;
     };
 }
-

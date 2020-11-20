@@ -37,3 +37,7 @@ int primitives::Shape::thickness() const
 {
     return m_thickness;
 }
+
+void primitives::Shape::draw(CDC* pDC, const RECT& rect) const
+{
+}
