@@ -5,6 +5,7 @@ primitives::Shape::Shape()
     : m_backgroundColor(RGB(255, 255, 255))
     , m_foregroundColor(RGB(0, 0, 0))
     , m_thickness(1)
+    , m_type (ShapeType::None)
 {
 }
 
@@ -38,6 +39,26 @@ int primitives::Shape::thickness() const
     return m_thickness;
 }
 
+primitives::Convert primitives::Shape::convert() const
+{
+    return m_convert;
+}
+
+void primitives::Shape::setType(ShapeType type)
+{
+    m_type = type;
+}
+
+primitives::ShapeType primitives::Shape::type() const
+{
+    return m_type;
+}
+
 void primitives::Shape::draw(CDC* pDC, const RECT& rect) const
 {
+}
+
+void primitives::Shape::setConvert(Convert c)
+{
+    m_convert = c;
 }

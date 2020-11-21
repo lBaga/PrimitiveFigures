@@ -29,6 +29,17 @@ public:
     virtual void OnInitialUpdate();
     afx_msg void OnBnClickedMfccolorbutton1();
     afx_msg void OnBnClickedMfccolorbutton2();
+    int thickness;
+    afx_msg void OnDeltaposSpin2(NMHDR* pNMHDR, LRESULT* pResult);
+    afx_msg void OnBnClickedButton2();
+    afx_msg void OnBnClickedButton3();
+    afx_msg void OnBnClickedButton4();
+    int rectCount;
+    int triangCount;
+    int circleCount;
+    int squareCount;
+    afx_msg void OnBnClickedButton5();
+    virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 };
 
 

@@ -7,6 +7,7 @@ class CDC;
 namespace primitives
 {
     enum class ShapeType { None, Circle, Rectangle, Square, Triangle};
+    enum class Convert { None, X, Y, XY};
 
     class BaseShape
     {
@@ -15,4 +16,3 @@ namespace primitives
         virtual void draw(CDC* pDC, const RECT& rect) const = 0;
     };
 }
-
